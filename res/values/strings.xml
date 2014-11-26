@@ -1,4 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name">Android_Application</string>
+
+    <string name="person_name_background">Imię</string>
+    <string name="person_surname_background">Nazwisko</string>
+    <string name="person_phone_number_background">Numer Telefonu</string>
+
 </resources>
