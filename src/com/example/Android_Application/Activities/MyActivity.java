@@ -7,6 +7,7 @@ import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.ListView;
 import com.example.Android_Application.ActivitiesHelpers.MyActivityFieldsHelper;
+import com.example.Android_Application.Adapters.PersonAdapter;
 import com.example.Android_Application.Person.Person;
 import com.example.Android_Application.R;
 
@@ -16,7 +17,7 @@ public class MyActivity extends Activity {
 
     private MyActivityFieldsHelper fieldsHelper = new MyActivityFieldsHelper();
     private ArrayList<Person> persons = new ArrayList<Person>();
-    private ArrayAdapter<Person> personsAdapter = null;
+    private PersonAdapter personsAdapter = null;
 
     /**
      * Called when the activity is first created.
@@ -26,7 +27,7 @@ public class MyActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.main);
 
-        personsAdapter = new ArrayAdapter<Person>(this,android.R.layout.simple_list_item_1, persons);
+        personsAdapter = new PersonAdapter(this, persons);
 
         fieldsHelper.setEditName((EditText)findViewById(R.id.editName));
         fieldsHelper.setEditSurname((EditText) findViewById(R.id.editSurname));
