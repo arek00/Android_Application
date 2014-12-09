@@ -4,6 +4,7 @@ import android.content.ContentValues;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
+import android.util.Log;
 import android.widget.CursorAdapter;
 import com.example.Android_Application.Person.Person;
 
@@ -32,13 +33,14 @@ public class DBConnector {
     }
 
 
-    public Cursor getDataFromDB()
+    public Cursor getDataFromDB(String[] columnNames)
     {
         SQLiteDatabase database = helper.getReadableDatabase();
         Cursor cursor;
-        String statement = String.format("SELECT * FROM %s",OpenHelper.tableName);
+        String statement = "SELECT rowid as _id, * FROM " + OpenHelper.tableName;
 
-        cursor = database.rawQuery(statement, null);
+        cursor = database.rawQuery(statement,columnNames);
+
 
         return cursor;
     }

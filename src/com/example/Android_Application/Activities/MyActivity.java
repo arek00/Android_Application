@@ -3,6 +3,7 @@ package com.example.Android_Application.Activities;
 import android.app.Activity;
 import android.database.Cursor;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
@@ -23,10 +24,10 @@ public class MyActivity extends Activity {
 
 
     private OpenHelper dbHelper = new OpenHelper(this);
-    private DBPersonAdapter dbAdapter;
     private DBConnector connector = new DBConnector(dbHelper);
     private DBPersonAdapter adapter;
     private Cursor cursor;
+    private String[] columnNames = {OpenHelper.nameColumn,OpenHelper.surnameColumn,OpenHelper.phoneNumberColumn};
 
     /**
      * Called when the activity is first created.
@@ -41,9 +42,8 @@ public class MyActivity extends Activity {
         fieldsHelper.setEditPhoneNumber((EditText) findViewById(R.id.editPhoneNumber));
         fieldsHelper.setPersonList((ListView)findViewById(R.id.personList));
 
-        cursor = connector.getDataFromDB();
+        cursor = connector.getDataFromDB(null);
         adapter = new DBPersonAdapter(this, cursor);
-
         fieldsHelper.getPersonList().setAdapter(adapter);
     }
 
@@ -55,5 +55,15 @@ public class MyActivity extends Activity {
         Person person = new Person(name, surname, phoneNumber);
 
         connector.putDataToDB(person);
+
+        refreshAdapter();
     }
+
+    public void refreshAdapter()
+    {
+        cursor = connector.getDataFromDB(null);
+        adapter.changeCursor(cursor);
+        adapter.notifyDataSetChanged();
+    }
+
 }

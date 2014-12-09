@@ -14,8 +14,7 @@ import com.example.Android_Application.R;
  */
 public class DBPersonAdapter extends CursorAdapter{
 
-    private Cursor dbCursor;
-    private Context context;
+    private LayoutInflater inflater;
 
     public DBPersonAdapter(Context context, Cursor cursor)
     {
@@ -24,13 +23,8 @@ public class DBPersonAdapter extends CursorAdapter{
 
     @Override
     public View newView(Context context, Cursor cursor, ViewGroup viewGroup) {
-
-        View line;
-
-            LayoutInflater inflater = (LayoutInflater)context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-            line = inflater.inflate(R.layout.listview_layout, null);
-
-        return line;
+        inflater = (LayoutInflater)context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+        return inflater.inflate(R.layout.listview_layout, null);
     }
 
     @Override
@@ -39,11 +33,11 @@ public class DBPersonAdapter extends CursorAdapter{
         TextView surnameLine = (TextView)view.findViewById(R.id.SurnameLine);
         TextView phoneNumberLine = (TextView)view.findViewById(R.id.PhoneNumberLine);
 
-        String name = cursor.getString(1);
-        String surname = cursor.getString(2);
-        String phoneNumber = cursor.getString(3);
+            String name = cursor.getString(2);
+            String surname = cursor.getString(3);
+            String phoneNumber = cursor.getString(4);
 
-        surnameLine.setText(name + " " + surname.toUpperCase());
-        phoneNumberLine.setText(phoneNumber);
+            surnameLine.setText(name + " " + surname.toUpperCase());
+            phoneNumberLine.setText(phoneNumber);
     }
 }
