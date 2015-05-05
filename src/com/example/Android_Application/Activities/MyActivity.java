@@ -55,7 +55,6 @@ public class MyActivity extends Activity {
         Person person = new Person(name, surname, phoneNumber);
 
         connector.putDataToDB(person);
-
         refreshAdapter();
     }
 
